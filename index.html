@@ -1,0 +1,1701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Procore Upload Project — Six Sigma DMAIC</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ===== SIDEBAR ===== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="logo">ACx</div>
+      <div class="project-name">Procore Upload Project</div>
+      <div class="sidebar-author">
+        <div class="author-name">Aaryan Kapoor</div>
+        <div class="author-role">Program Management Intern</div>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="#" class="nav-item active" data-section="overview">🏠 Overview</a>
+      <a href="#" class="nav-item" data-section="dmaic">📊 DMAIC Flowchart</a>
+
+      <div class="nav-group-label">◆ Define</div>
+      <a href="#" class="nav-item nav-sub" data-section="project-charter">📄 Project Charter</a>
+      <a href="#" class="nav-item nav-sub" data-section="team-launch">👥 Team Launch</a>
+      <a href="#" class="nav-item nav-sub" data-section="project-planning">📅 Project Planning</a>
+      <a href="#" class="nav-item nav-sub" data-section="voc">🗣 Voice of Customer</a>
+      <a href="#" class="nav-item nav-sub" data-section="sipoc">🔄 SIPOC</a>
+
+      <div class="nav-group-label">◆ Measure</div>
+      <a href="#" class="nav-item nav-sub" data-section="process-mapping">🗺 Process Mapping</a>
+      <a href="#" class="nav-item nav-sub" data-section="vsm">📊 Value Stream Map</a>
+      <a href="#" class="nav-item nav-sub" data-section="datacollection">📁 Data Collection Plan</a>
+      <a href="#" class="nav-item nav-sub" data-section="msa">🔬 MSA</a>
+      <a href="#" class="nav-item nav-sub" data-section="collect-data">📥 Collect Data</a>
+      <a href="#" class="nav-item nav-sub" data-section="baseline">📉 Baseline Calculation</a>
+
+      <div class="nav-group-label">◆ Analyse</div>
+      <a href="#" class="nav-item nav-sub" data-section="brainstorm">🧠 Brainstorm / 4Fs</a>
+      <a href="#" class="nav-item nav-sub" data-section="fishbone">🐟 Fishbone Diagram</a>
+      <a href="#" class="nav-item nav-sub" data-section="fivewhys">❓ 5 Whys</a>
+      <a href="#" class="nav-item nav-sub" data-section="ce-matrix">⚖ C&amp;E Matrix</a>
+      <a href="#" class="nav-item nav-sub" data-section="fmea">⚠ FMEA</a>
+      <a href="#" class="nav-item nav-sub" data-section="scatter-plots">📈 Scatter Plots &amp; Regression</a>
+
+      <div class="nav-group-label">◆ Improve</div>
+      <a href="#" class="nav-item nav-sub" data-section="improvement-plan">📝 Improvement Plan</a>
+      <a href="#" class="nav-item nav-sub" data-section="smed">⚡ SMED</a>
+      <a href="#" class="nav-item nav-sub" data-section="continuous-flow">🔁 Continuous Flow</a>
+      <a href="#" class="nav-item nav-sub" data-section="pilot">🧪 Pilot Solution</a>
+      <a href="#" class="nav-item nav-sub" data-section="full-scale">🚀 Full Scale Implementation</a>
+      <a href="#" class="nav-item nav-sub" data-section="kaizen">✨ Kaizen</a>
+
+      <div class="nav-group-label">◆ Control</div>
+      <a href="#" class="nav-item nav-sub" data-section="control-plan">📋 Control Plan</a>
+      <a href="#" class="nav-item nav-sub" data-section="control-measures">🛡 Control Measures</a>
+      <a href="#" class="nav-item nav-sub" data-section="closure-checklist">☑ Closure Checklist</a>
+      <a href="#" class="nav-item nav-sub" data-section="closure-report">📑 Closure Report</a>
+      <a href="#" class="nav-item nav-sub" data-section="closure">🏁 Project Closure</a>
+      <a href="#" class="nav-item nav-sub" data-section="celebrate">🎉 Celebrate Success</a>
+
+      <div class="nav-group-label">◆ Other</div>
+      <a href="#" class="nav-item" data-section="a3">📋 A3 Problem Solving</a>
+      <a href="#" class="nav-item" data-section="stakeholder">👥 Stakeholder Register</a>
+      <a href="#" class="nav-item" data-section="actions">✅ Action Tracker</a>
+      <a href="#" class="nav-item" data-section="timeline">📅 Timeline</a>
+      <a href="#" class="nav-item" data-section="meetings">📝 Meeting Log</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-brand">Six Sigma DMAIC</div>
+    </div>
+  </aside>
+
+  <!-- ===== MAIN WRAPPER ===== -->
+  <div class="main-wrapper">
+
+    <!-- TOP BAR -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="hamburger" id="hamburger" aria-label="Toggle sidebar">☰</button>
+        <div class="topbar-status">
+          <span class="status-label">Status:</span>
+          <select id="globalStatus" class="status-select">
+            <option value="Planning">Planning</option>
+            <option value="In Progress" selected>In Progress</option>
+            <option value="Complete">Complete</option>
+          </select>
+          <span class="status-label" style="margin-left:1.5rem;">Phase:</span>
+          <span class="phase-badge" id="topbarPhase">Define</span>
+          <span class="status-label" style="margin-left:1.5rem;">Actions:</span>
+          <span class="actions-pct" id="topbarActionsPct">0%</span>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <button class="btn-theme" id="themeToggle" onclick="toggleTheme()" title="Toggle light/dark mode">🌙</button>
+        <button class="btn-export" onclick="window.print()">🖨 Export / Print</button>
+      </div>
+    </header>
+
+    <!-- CONTENT AREA -->
+    <main class="content-area">
+
+      <!-- ==================== OVERVIEW ==================== -->
+      <section class="section active" id="section-overview">
+        <div class="section-header">
+          <h1 class="section-title">🏠 Project Overview</h1>
+        </div>
+
+        <div class="overview-hero card">
+          <div class="overview-title-row">
+            <h2 id="projectTitle" contenteditable="true" class="editable project-main-title"
+                data-key="projectTitle">Substation Equipment Upload to Procore</h2>
+          </div>
+          <div class="overview-meta-grid">
+            <div class="meta-item">
+              <label>Project ID</label>
+              <span contenteditable="true" class="editable meta-value" data-key="projectId">PRJ-2024-001</span>
+            </div>
+            <div class="meta-item">
+              <label>Start Date</label>
+              <span contenteditable="true" class="editable meta-value" data-key="startDate">June 2, 2025</span>
+            </div>
+            <div class="meta-item">
+              <label>Target Completion</label>
+              <span contenteditable="true" class="editable meta-value" data-key="targetDate">August 29, 2025</span>
+            </div>
+            <div class="meta-item">
+              <label>Status</label>
+              <select class="status-dropdown editable-select" data-key="overviewStatus" id="overviewStatus">
+                <option value="Planning">Planning</option>
+                <option value="In Progress" selected>In Progress</option>
+                <option value="Complete">Complete</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="two-col-grid">
+          <div class="card">
+            <div class="card-label">Problem Statement</div>
+            <div contenteditable="true" class="editable textarea-like" data-key="problemStatement"
+              >Currently, substation equipment data is not systematically uploaded into Procore, leading to gaps in project documentation, difficulty tracking asset status, and increased risk of data loss or miscommunication between field teams and project managers.</div>
+          </div>
+          <div class="card">
+            <div class="card-label">Business Case</div>
+            <div contenteditable="true" class="editable textarea-like" data-key="businessCase"
+              >Procore serves as the single source of truth for project documentation. Establishing a repeatable, efficient process for uploading substation equipment data will reduce rework, improve compliance, and enable real-time visibility for stakeholders — directly supporting project delivery timelines and quality standards.</div>
+          </div>
+        </div>
+
+        <div class="two-col-grid">
+          <div class="card">
+            <div class="card-label">✅ In Scope</div>
+            <div contenteditable="true" class="editable textarea-like" data-key="inScope"
+              >• Upload process for all substation equipment types
+• Template development for Procore data entry
+• Training materials for field staff
+• QA/QC checklist for data accuracy
+• Process documentation and SOPs</div>
+          </div>
+          <div class="card">
+            <div class="card-label">🚫 Out of Scope</div>
+            <div contenteditable="true" class="editable textarea-like" data-key="outScope"
+              >• Procore software customization or development
+• Equipment procurement or sourcing
+• Non-substation equipment categories
+• IT infrastructure changes
+• Third-party system integrations</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-label">Project Goals</div>
+          <div contenteditable="true" class="editable textarea-like" data-key="projectGoals"
+            >1. Establish a standardized, repeatable upload process within 30 days
+2. Achieve 100% substation equipment coverage in Procore by project end
+3. Reduce data entry errors by ≥50% vs. current ad-hoc approach
+4. Deliver training to all relevant team members before go-live
+5. Create documentation that enables process handoff to the operations team</div>
+        </div>
+
+        <div class="card">
+          <div class="card-label">Team Members</div>
+          <div class="table-container">
+            <table class="data-table" id="teamTable">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Role</th>
+                  <th>Department</th>
+                  <th>Contact</th>
+                </tr>
+              </thead>
+              <tbody id="teamTableBody">
+                <tr>
+                  <td contenteditable="true" class="editable">Aaron Kapustin</td>
+                  <td contenteditable="true" class="editable">Project Lead / Intern</td>
+                  <td contenteditable="true" class="editable">Project Management</td>
+                  <td contenteditable="true" class="editable">akapustin@company.com</td>
+                </tr>
+                <tr>
+                  <td contenteditable="true" class="editable">TBD</td>
+                  <td contenteditable="true" class="editable">Sponsor / Manager</td>
+                  <td contenteditable="true" class="editable">Engineering</td>
+                  <td contenteditable="true" class="editable">—</td>
+                </tr>
+                <tr>
+                  <td contenteditable="true" class="editable">TBD</td>
+                  <td contenteditable="true" class="editable">Procore Administrator</td>
+                  <td contenteditable="true" class="editable">IT / Systems</td>
+                  <td contenteditable="true" class="editable">—</td>
+                </tr>
+                <tr>
+                  <td contenteditable="true" class="editable">TBD</td>
+                  <td contenteditable="true" class="editable">Field Engineer</td>
+                  <td contenteditable="true" class="editable">Operations</td>
+                  <td contenteditable="true" class="editable">—</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <button class="btn-add" onclick="addTeamRow()">+ Add Member</button>
+        </div>
+      </section>
+
+      <!-- ==================== DMAIC ==================== -->
+      <section class="section" id="section-dmaic">
+        <div class="section-header">
+          <h1 class="section-title">📊 DMAIC Process Flowchart</h1>
+          <p class="section-subtitle">Click any tool card to navigate to that section. Click a phase pill to cycle its status.</p>
+        </div>
+
+        <!-- Phase status pills -->
+        <div class="card phase-tracker-card">
+          <div class="card-label">Phase Progress — click to cycle status</div>
+          <div class="phase-pills" id="phasePills">
+            <div class="phase-pill" data-phase="0" data-status="In Progress">
+              <div class="pill-dot"></div>
+              <div class="pill-name">Define</div>
+              <div class="pill-status">In Progress</div>
+            </div>
+            <div class="phase-pill" data-phase="1" data-status="Not Started">
+              <div class="pill-dot"></div>
+              <div class="pill-name">Measure</div>
+              <div class="pill-status">Not Started</div>
+            </div>
+            <div class="phase-pill" data-phase="2" data-status="Not Started">
+              <div class="pill-dot"></div>
+              <div class="pill-name">Analyse</div>
+              <div class="pill-status">Not Started</div>
+            </div>
+            <div class="phase-pill" data-phase="3" data-status="Not Started">
+              <div class="pill-dot"></div>
+              <div class="pill-name">Improve</div>
+              <div class="pill-status">Not Started</div>
+            </div>
+            <div class="phase-pill" data-phase="4" data-status="Not Started">
+              <div class="pill-dot"></div>
+              <div class="pill-name">Control</div>
+              <div class="pill-status">Not Started</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ====== DMAIC FLOWCHART ====== -->
+        <div class="dmaic-flowchart-wrap">
+
+          <!-- ── DEFINE ── -->
+          <div class="fc-phase-block">
+            <div class="fc-phase-label define-bg">
+              <div class="fc-phase-title">DEFINE</div>
+              <div class="fc-phase-desc">Define Y=f(X<sub>1</sub>, X<sub>2</sub>…), plan project &amp; get team ready</div>
+            </div>
+            <div class="fc-row">
+              <div class="fc-tool define-tool clickable-tool" data-section="project-charter">
+                <div class="fc-tool-name">Project Charter</div>
+                <ul class="fc-bullets">
+                  <li>Problem Statement</li><li>Objectives</li><li>Bus-Benefit</li><li>Scope</li><li>Plan</li>
+                </ul>
+              </div>
+              <div class="fc-arrow">→</div>
+              <div class="fc-tool define-tool clickable-tool" data-section="team-launch">
+                <div class="fc-tool-name">Team Launch</div>
+                <ul class="fc-bullets">
+                  <li>Intro</li><li>Training</li><li>Team Mandate</li><li>Meeting criteria</li><li>RACI</li>
+                </ul>
+              </div>
+              <div class="fc-arrow">→</div>
+              <div class="fc-tool define-tool clickable-tool" data-section="project-planning">
+                <div class="fc-tool-name">Project Planning</div>
+                <ul class="fc-bullets">
+                  <li>Budget</li><li>Time</li><li>Scope</li>
+                </ul>
+              </div>
+              <div class="fc-arrow">→</div>
+              <div class="fc-tool define-tool clickable-tool" data-section="voc">
+                <div class="fc-tool-name">Voice of Customer</div>
+                <ul class="fc-bullets">
+                  <li>VOC gathering (Surveys…)</li><li>Affinity Diagrams</li><li>Tree Diagrams</li><li>Kano/Multi-voting</li><li>CTQ's</li>
+                </ul>
+              </div>
+              <div class="fc-arrow">→</div>
+              <div class="fc-tool define-tool clickable-tool" data-section="sipoc">
+                <div class="fc-tool-name">SIPOC</div>
+                <ul class="fc-bullets">
+                  <li>Y = CTO = Output</li><li>Problem = Goals</li><li>X = Inputs = Root Causes</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── GATE REVIEW 1 ── -->
+          <div class="fc-gate-row">
+            <div class="fc-gate">
+              <div class="fc-gate-diamond define-gate">
+                <span>GATE<br>REVIEW</span>
+              </div>
+              <div class="fc-gate-details">
+                <ul class="fc-bullets fc-gate-bullets">
+                  <li>List of questions</li>
+                  <li>Review of Phase Completed</li>
+                  <li>Go/No-go to Next Phase</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── MEASURE ── -->
+          <div class="fc-phase-block">
+            <div class="fc-phase-label measure-bg">
+              <div class="fc-phase-title">MEASURE</div>
+              <div class="fc-phase-desc">Visual the process behind Y &amp; X's, identify quick wins, collect data on Y &amp; X<sub>1</sub>, X<sub>2</sub>… &amp; calculate baseline</div>
+            </div>
+            <div class="fc-row">
+              <div class="fc-tool measure-tool clickable-tool" data-section="process-mapping">
+                <div class="fc-tool-name">Process Mapping</div>
+                <ul class="fc-bullets">
+                  <li>Linear</li><li>Swimlane</li><li>Macro</li><li>Micro</li>
+                </ul>
+              </div>
+              <div class="fc-arrow">→</div>
+              <div class="fc-tool measure-tool clickable-tool" data-section="vsm">
+                <div class="fc-tool-name">Value Stream Mapping</div>
+                <ul class="fc-bullets">
+                  <li>Current State</li><li>Future State</li><li>What the process actually is</li><li>TIMWOOD</li>
+                </ul>
+              </div>
+              <div class="fc-arrow">→</div>
+              <!-- Decision diamond -->
+              <div class="fc-decision-wrap">
+                <div class="fc-decision measure-decision">
+                  <span>Analyse<br>VSM<br>or PM</span>
+                </div>
+                <div class="fc-decision-label">Data<br><span class="yes-no">Yes / No</span></div>
+              </div>
+              <div class="fc-arrow">→</div>
+              <div class="fc-tool measure-tool clickable-tool" data-section="datacollection">
+                <div class="fc-tool-name">Data Collection Plan</div>
+                <ul class="fc-bullets">
+                  <li>What</li><li>Who</li><li>How</li><li>When</li><li>Where</li>
+                </ul>
+              </div>
+              <div class="fc-arrow">→</div>
+              <div class="fc-tool measure-tool clickable-tool" data-section="msa">
+                <div class="fc-tool-name">Measurement System Analysis</div>
+                <ul class="fc-bullets">
+                  <li>GRR</li><li>Stability</li><li>Discrimination</li><li>Accurate</li><li>Linear</li>
+                </ul>
+              </div>
+              <div class="fc-arrow">→</div>
+              <div class="fc-tool measure-tool clickable-tool" data-section="collect-data">
+                <div class="fc-tool-name">Collect Data</div>
+                <ul class="fc-bullets">
+                  <li>Cycle Time</li><li>FPT</li><li>RTY</li><li>Process Capability</li>
+                </ul>
+              </div>
+              <div class="fc-arrow fc-arrow-down">↓</div>
+              <div class="fc-tool measure-tool clickable-tool fc-offset" data-section="baseline">
+                <div class="fc-tool-name">Baseline Calculation</div>
+                <ul class="fc-bullets">
+                  <li>Cycle Time</li><li>FPT</li><li>RTY</li><li>Process Capability</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── GATE REVIEW 2 ── -->
+          <div class="fc-gate-row">
+            <div class="fc-gate">
+              <div class="fc-gate-diamond measure-gate">
+                <span>GATE<br>REVIEW</span>
+              </div>
+              <div class="fc-gate-details">
+                <ul class="fc-bullets fc-gate-bullets">
+                  <li>List of questions</li>
+                  <li>Review of Phase Completed</li>
+                  <li>Go/No-go to Next Phase</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── ANALYSE ── -->
+          <div class="fc-phase-block">
+            <div class="fc-phase-label analyse-bg">
+              <div class="fc-phase-title">ANALYSE</div>
+              <div class="fc-phase-desc">Analyse data on Y &amp; X<sub>1</sub>, X<sub>2</sub>… &amp; determine critical X's</div>
+            </div>
+            <div class="fc-row">
+              <div class="fc-tool analyse-tool clickable-tool" data-section="brainstorm">
+                <div class="fc-tool-name">Brainstorm Inputs / CTQ's &amp; 4F's</div>
+                <ul class="fc-bullets">
+                  <li>Focus</li><li>Free Flight</li><li>Factor</li><li>Formulate</li>
+                </ul>
+              </div>
+              <div class="fc-arrow">→</div>
+              <div class="fc-tool analyse-tool clickable-tool" data-section="fishbone">
+                <div class="fc-tool-name">Fishbone</div>
+                <ul class="fc-bullets">
+                  <li>6M's</li>
+                </ul>
+              </div>
+              <div class="fc-arrow">→</div>
+              <div class="fc-tool analyse-tool clickable-tool" data-section="fivewhys">
+                <div class="fc-tool-name">5 Whys</div>
+                <ul class="fc-bullets">
+                  <li>Root cause drill-down</li>
+                </ul>
+              </div>
+              <div class="fc-arrow">→</div>
+              <div class="fc-tool analyse-tool clickable-tool" data-section="ce-matrix">
+                <div class="fc-tool-name">Cause &amp; Effect Matrix</div>
+                <ul class="fc-bullets">
+                  <li>X against Y</li><li>Pareto</li>
+                </ul>
+              </div>
+              <div class="fc-arrow">→</div>
+              <div class="fc-tool analyse-tool clickable-tool" data-section="fmea">
+                <div class="fc-tool-name">FMEA</div>
+                <ul class="fc-bullets">
+                  <li>RPN</li>
+                </ul>
+              </div>
+              <div class="fc-arrow">→</div>
+              <div class="fc-tool analyse-tool clickable-tool" data-section="scatter-plots">
+                <div class="fc-tool-name">Scatter Plots &amp; Regression</div>
+                <ul class="fc-bullets">
+                  <li>Pearson R</li><li>r ≤ 0.5, r ≥ 0.45</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── GATE REVIEW 3 ── -->
+          <div class="fc-gate-row">
+            <div class="fc-gate">
+              <div class="fc-gate-diamond analyse-gate">
+                <span>GATE<br>REVIEW</span>
+              </div>
+              <div class="fc-gate-details">
+                <ul class="fc-bullets fc-gate-bullets">
+                  <li>List of questions</li>
+                  <li>Review of Phase Completed</li>
+                  <li>Go/No-go to Next Phase</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── IMPROVE ── -->
+          <div class="fc-phase-block">
+            <div class="fc-phase-label improve-bg">
+              <div class="fc-phase-title">IMPROVE</div>
+              <div class="fc-phase-desc">Develop, pilot &amp; implement improvement plan to resolve critical X's</div>
+            </div>
+            <div class="fc-row">
+              <div class="fc-tool improve-tool clickable-tool" data-section="improvement-plan">
+                <div class="fc-tool-name">Improvement Plan</div>
+                <ul class="fc-bullets">
+                  <li>Internals</li><li>Externals</li><li>Streamline</li>
+                </ul>
+              </div>
+              <div class="fc-arrow">→</div>
+              <div class="fc-tool improve-tool clickable-tool" data-section="smed">
+                <div class="fc-tool-name">SMED</div>
+                <ul class="fc-bullets">
+                  <li>Takt Time</li><li>Kanban</li><li>U-Shape Flow</li><li>Pull</li>
+                </ul>
+              </div>
+              <div class="fc-arrow">→</div>
+              <div class="fc-tool improve-tool clickable-tool" data-section="continuous-flow">
+                <div class="fc-tool-name">Continuous Flow</div>
+                <ul class="fc-bullets">
+                  <li>Takt Time</li><li>Kanban</li><li>U-Shape Flow</li><li>Pull</li>
+                </ul>
+              </div>
+              <div class="fc-arrow">→</div>
+              <div class="fc-tool improve-tool clickable-tool" data-section="pilot">
+                <div class="fc-tool-name">Pilot Solution</div>
+                <ul class="fc-bullets">
+                  <li>Collect data</li><li>Learn</li>
+                </ul>
+              </div>
+              <div class="fc-arrow">→</div>
+              <div class="fc-tool improve-tool clickable-tool" data-section="full-scale">
+                <div class="fc-tool-name">Full Scale Implementation</div>
+                <ul class="fc-bullets">
+                  <li>Accelerated DMAIC</li>
+                </ul>
+              </div>
+              <div class="fc-arrow">→</div>
+              <div class="fc-tool improve-tool clickable-tool" data-section="kaizen">
+                <div class="fc-tool-name">Kaizen</div>
+                <ul class="fc-bullets">
+                  <li>Achieve objectives</li><li>Lessons learned</li><li>Share improvement plan</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── GATE REVIEW 4 ── -->
+          <div class="fc-gate-row">
+            <div class="fc-gate">
+              <div class="fc-gate-diamond improve-gate">
+                <span>GATE<br>REVIEW</span>
+              </div>
+              <div class="fc-gate-details">
+                <ul class="fc-bullets fc-gate-bullets">
+                  <li>List of questions</li>
+                  <li>Review of Phase Completed</li>
+                  <li>Go/No-go to Next Phase</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── CONTROL ── -->
+          <div class="fc-phase-block">
+            <div class="fc-phase-label control-bg">
+              <div class="fc-phase-title">CONTROL</div>
+              <div class="fc-phase-desc">Develop &amp; implement a control plan that ensures sustainability of improvements</div>
+            </div>
+            <div class="fc-row">
+              <div class="fc-tool control-tool clickable-tool" data-section="control-plan">
+                <div class="fc-tool-name">Control Plan</div>
+                <ul class="fc-bullets">
+                  <li>Internals</li><li>Externals</li><li>Streamline</li>
+                </ul>
+              </div>
+              <div class="fc-arrow">→</div>
+              <div class="fc-tool control-tool clickable-tool" data-section="control-measures">
+                <div class="fc-tool-name">Control Measures</div>
+                <ul class="fc-bullets">
+                  <li>5S</li><li>Visual Mgt</li><li>Poke Yoke</li><li>SOP's</li><li>Standardised Work Practices</li>
+                </ul>
+              </div>
+              <div class="fc-arrow">→</div>
+              <div class="fc-tool control-tool clickable-tool" data-section="closure-checklist">
+                <div class="fc-tool-name">Project Closure Checklist</div>
+                <ul class="fc-bullets">
+                  <li>Achieve objectives</li><li>Lessons learned</li><li>Share improvement plan</li><li>Standardised plan</li>
+                </ul>
+              </div>
+              <div class="fc-arrow">→</div>
+              <div class="fc-tool control-tool clickable-tool" data-section="closure-report">
+                <div class="fc-tool-name">Project Closure Report</div>
+                <ul class="fc-bullets">
+                  <li>Sponsor to sign</li>
+                </ul>
+              </div>
+              <div class="fc-arrow">→</div>
+              <div class="fc-tool control-tool clickable-tool" data-section="closure">
+                <div class="fc-tool-name">Project Closure</div>
+                <ul class="fc-bullets">
+                  <li>Final sign-off</li><li>Handover</li>
+                </ul>
+              </div>
+              <div class="fc-arrow">→</div>
+              <div class="fc-tool control-tool fc-celebrate clickable-tool" data-section="celebrate">
+                <div class="fc-tool-name">🎉 Celebrate Success!!</div>
+                <ul class="fc-bullets">
+                  <li>Recognise the team</li><li>Share the story</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- end dmaic-flowchart-wrap -->
+      </section>
+
+      <!-- ==================== A3 ==================== -->
+      <section class="section" id="section-a3">
+        <div class="section-header">
+          <h1 class="section-title">📋 A3 Problem Solving</h1>
+        </div>
+        <div class="a3-grid">
+          <div class="card a3-card">
+            <div class="a3-card-number">1</div>
+            <div class="card-label">Background</div>
+            <div contenteditable="true" class="editable textarea-like" data-key="a3background"
+              >The organization uses Procore as its primary project management platform. Substation equipment records are currently managed through disconnected spreadsheets and informal processes, creating documentation gaps and accountability issues.</div>
+          </div>
+          <div class="card a3-card">
+            <div class="a3-card-number">2</div>
+            <div class="card-label">Current Condition</div>
+            <div contenteditable="true" class="editable textarea-like" data-key="a3current"
+              >Equipment data is manually tracked in Excel. No standardized fields or templates exist. Upload frequency is ad-hoc, leading to outdated records. Field teams and PMs reference different versions of data, causing miscommunication and rework.</div>
+          </div>
+          <div class="card a3-card">
+            <div class="a3-card-number">3</div>
+            <div class="card-label">Target Condition</div>
+            <div contenteditable="true" class="editable textarea-like" data-key="a3target"
+              >A defined, repeatable process exists for uploading substation equipment into Procore. All equipment records are current, accurate, and accessible in real-time. Team members follow a standard SOP with &lt;5% error rate.</div>
+          </div>
+          <div class="card a3-card">
+            <div class="a3-card-number">4</div>
+            <div class="card-label">Root Cause Analysis</div>
+            <div contenteditable="true" class="editable textarea-like" data-key="a3rootcause"
+              >Primary root cause: No documented upload process or template exists.
+Contributing causes:
+- Lack of ownership/accountability for data entry
+- Training gap on Procore equipment module
+- No defined data fields or standards
+- Competing priorities reduce time allocated to data entry</div>
+          </div>
+          <div class="card a3-card">
+            <div class="a3-card-number">5</div>
+            <div class="card-label">Countermeasures</div>
+            <div contenteditable="true" class="editable textarea-like" data-key="a3counter"
+              >1. Develop standardized upload template with required fields
+2. Create SOP and training materials for Procore equipment module
+3. Assign data entry ownership to specific roles
+4. Implement QA checklist and review cycle
+5. Establish regular cadence for data updates</div>
+          </div>
+          <div class="card a3-card">
+            <div class="a3-card-number">6</div>
+            <div class="card-label">Action Plan</div>
+            <div contenteditable="true" class="editable textarea-like" data-key="a3action"
+              >Week 1-2: Define scope, map current process, conduct interviews
+Week 3-4: Develop template and SOP
+Week 5-6: Pilot with one substation project
+Week 7-8: Refine, train team, document lessons learned
+Week 9-10: Full rollout and handoff</div>
+          </div>
+          <div class="card a3-card a3-full">
+            <div class="a3-card-number">7</div>
+            <div class="card-label">Follow Up / Lessons Learned</div>
+            <div contenteditable="true" class="editable textarea-like" data-key="a3followup"
+              >To be completed upon project closure. Review KPIs against targets, document what worked and what didn't, and identify opportunities for continuous improvement in the next project cycle.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== FISHBONE ==================== -->
+      <section class="section" id="section-fishbone">
+        <div class="section-header">
+          <h1 class="section-title">🐟 Fishbone (Ishikawa) Diagram</h1>
+        </div>
+
+        <div class="card">
+          <div class="card-label">Visual Diagram</div>
+          <div class="fishbone-svg-container">
+            <svg id="fishboneSVG" viewBox="0 0 900 420" xmlns="http://www.w3.org/2000/svg" class="fishbone-svg">
+              <!-- Spine -->
+              <line x1="80" y1="210" x2="800" y2="210" stroke="#00d4ff" stroke-width="3"/>
+              <!-- Arrow head -->
+              <polygon points="820,210 795,198 795,222" fill="#00d4ff"/>
+              <!-- Effect box -->
+              <rect x="820" y="183" width="65" height="54" rx="6" fill="#1a4a5c" stroke="#00d4ff" stroke-width="2"/>
+              <text x="852" y="205" text-anchor="middle" fill="#00d4ff" font-size="9" font-weight="bold">Effect</text>
+              <text x="852" y="218" text-anchor="middle" fill="#e0f8ff" font-size="7.5">No Standard</text>
+              <text x="852" y="229" text-anchor="middle" fill="#e0f8ff" font-size="7.5">Upload Process</text>
+
+              <!-- TOP BONES -->
+              <!-- Method -->
+              <line x1="200" y1="210" x2="270" y2="100" stroke="#4a9eff" stroke-width="2"/>
+              <text x="248" y="90" text-anchor="middle" fill="#4a9eff" font-size="13" font-weight="bold">Method</text>
+              <line x1="220" y1="175" x2="270" y2="145" stroke="#4a9eff" stroke-width="1.5"/>
+              <text x="200" y="170" text-anchor="middle" fill="#cce8ff" font-size="10">No SOP</text>
+              <line x1="240" y1="150" x2="270" y2="120" stroke="#4a9eff" stroke-width="1.5"/>
+              <text x="218" y="145" text-anchor="middle" fill="#cce8ff" font-size="10">Ad-hoc process</text>
+
+              <!-- Material -->
+              <line x1="420" y1="210" x2="490" y2="90" stroke="#9b59b6" stroke-width="2"/>
+              <text x="468" y="78" text-anchor="middle" fill="#9b59b6" font-size="13" font-weight="bold">Material</text>
+              <line x1="438" y1="174" x2="490" y2="130" stroke="#9b59b6" stroke-width="1.5"/>
+              <text x="415" y="168" text-anchor="middle" fill="#e8d5ff" font-size="10">No template</text>
+              <line x1="458" y1="148" x2="490" y2="108" stroke="#9b59b6" stroke-width="1.5"/>
+              <text x="435" y="142" text-anchor="middle" fill="#e8d5ff" font-size="10">Inconsistent data</text>
+
+              <!-- Measurement -->
+              <line x1="620" y1="210" x2="700" y2="95" stroke="#f39c12" stroke-width="2"/>
+              <text x="688" y="83" text-anchor="middle" fill="#f39c12" font-size="13" font-weight="bold">Measurement</text>
+              <line x1="645" y1="172" x2="700" y2="130" stroke="#f39c12" stroke-width="1.5"/>
+              <text x="623" y="167" text-anchor="middle" fill="#ffe8c0" font-size="10">No KPIs defined</text>
+              <line x1="660" y1="148" x2="700" y2="110" stroke="#f39c12" stroke-width="1.5"/>
+              <text x="639" y="143" text-anchor="middle" fill="#ffe8c0" font-size="10">No error tracking</text>
+
+              <!-- BOTTOM BONES -->
+              <!-- Environment -->
+              <line x1="200" y1="210" x2="270" y2="325" stroke="#27ae60" stroke-width="2"/>
+              <text x="245" y="345" text-anchor="middle" fill="#27ae60" font-size="13" font-weight="bold">Environment</text>
+              <line x1="225" y1="248" x2="270" y2="275" stroke="#27ae60" stroke-width="1.5"/>
+              <text x="197" y="253" text-anchor="middle" fill="#c0ffe0" font-size="10">Time pressure</text>
+              <line x1="242" y1="272" x2="270" y2="300" stroke="#27ae60" stroke-width="1.5"/>
+              <text x="212" y="276" text-anchor="middle" fill="#c0ffe0" font-size="10">Remote work</text>
+
+              <!-- People -->
+              <line x1="420" y1="210" x2="490" y2="335" stroke="#e74c3c" stroke-width="2"/>
+              <text x="465" y="355" text-anchor="middle" fill="#e74c3c" font-size="13" font-weight="bold">People</text>
+              <line x1="443" y1="252" x2="490" y2="280" stroke="#e74c3c" stroke-width="1.5"/>
+              <text x="418" y="256" text-anchor="middle" fill="#ffc0c0" font-size="10">No training</text>
+              <line x1="460" y1="276" x2="490" y2="310" stroke="#e74c3c" stroke-width="1.5"/>
+              <text x="432" y="279" text-anchor="middle" fill="#ffc0c0" font-size="10">No ownership</text>
+
+              <!-- Machine -->
+              <line x1="620" y1="210" x2="700" y2="330" stroke="#1abc9c" stroke-width="2"/>
+              <text x="692" y="350" text-anchor="middle" fill="#1abc9c" font-size="13" font-weight="bold">Machine</text>
+              <line x1="645" y1="252" x2="700" y2="278" stroke="#1abc9c" stroke-width="1.5"/>
+              <text x="619" y="255" text-anchor="middle" fill="#c0fff5" font-size="10">Procore config</text>
+              <line x1="660" y1="276" x2="700" y2="308" stroke="#1abc9c" stroke-width="1.5"/>
+              <text x="633" y="279" text-anchor="middle" fill="#c0fff5" font-size="10">Access issues</text>
+            </svg>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-label">Causes by Category — Edit Below</div>
+          <div class="fishbone-table-wrapper">
+            <table class="data-table fishbone-table">
+              <thead>
+                <tr>
+                  <th>Category</th>
+                  <th>Cause 1</th>
+                  <th>Cause 2</th>
+                  <th>Sub-Cause (Cause 1)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="category-cell method">Method</td>
+                  <td contenteditable="true" class="editable" data-key="fb_method_c1">No documented SOP</td>
+                  <td contenteditable="true" class="editable" data-key="fb_method_c2">Ad-hoc upload process</td>
+                  <td contenteditable="true" class="editable" data-key="fb_method_s1">Steps vary by person</td>
+                </tr>
+                <tr>
+                  <td class="category-cell material">Material</td>
+                  <td contenteditable="true" class="editable" data-key="fb_material_c1">No standardized template</td>
+                  <td contenteditable="true" class="editable" data-key="fb_material_c2">Inconsistent data formats</td>
+                  <td contenteditable="true" class="editable" data-key="fb_material_s1">Different field names used</td>
+                </tr>
+                <tr>
+                  <td class="category-cell measurement">Measurement</td>
+                  <td contenteditable="true" class="editable" data-key="fb_measure_c1">No KPIs defined</td>
+                  <td contenteditable="true" class="editable" data-key="fb_measure_c2">No error tracking</td>
+                  <td contenteditable="true" class="editable" data-key="fb_measure_s1">No baseline metrics exist</td>
+                </tr>
+                <tr>
+                  <td class="category-cell environment">Environment</td>
+                  <td contenteditable="true" class="editable" data-key="fb_env_c1">Time pressure on field teams</td>
+                  <td contenteditable="true" class="editable" data-key="fb_env_c2">Remote/distributed work</td>
+                  <td contenteditable="true" class="editable" data-key="fb_env_s1">Competing priorities</td>
+                </tr>
+                <tr>
+                  <td class="category-cell people">People</td>
+                  <td contenteditable="true" class="editable" data-key="fb_people_c1">No Procore training</td>
+                  <td contenteditable="true" class="editable" data-key="fb_people_c2">No assigned data owner</td>
+                  <td contenteditable="true" class="editable" data-key="fb_people_s1">Unclear accountability</td>
+                </tr>
+                <tr>
+                  <td class="category-cell machine">Machine</td>
+                  <td contenteditable="true" class="editable" data-key="fb_machine_c1">Procore module misconfigured</td>
+                  <td contenteditable="true" class="editable" data-key="fb_machine_c2">Permission/access issues</td>
+                  <td contenteditable="true" class="editable" data-key="fb_machine_s1">Users lack admin rights</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== 5 WHYS ==================== -->
+      <section class="section" id="section-fivewhys">
+        <div class="section-header">
+          <h1 class="section-title">❓ 5 Whys Analysis</h1>
+        </div>
+
+        <div class="card">
+          <div class="card-label">Problem Statement</div>
+          <div contenteditable="true" class="editable textarea-like" data-key="whysProblem" style="margin-bottom:0"
+            >Substation equipment is not being consistently uploaded into Procore, resulting in incomplete project records.</div>
+        </div>
+
+        <div class="whys-chain">
+          <div class="why-row">
+            <div class="why-number">Why 1</div>
+            <div class="why-arrow">→</div>
+            <div contenteditable="true" class="editable why-answer" data-key="why1"
+              >There is no established process for uploading equipment data into Procore.</div>
+          </div>
+          <div class="why-row">
+            <div class="why-number">Why 2</div>
+            <div class="why-arrow">→</div>
+            <div contenteditable="true" class="editable why-answer" data-key="why2"
+              >No one has been assigned ownership of the data entry task.</div>
+          </div>
+          <div class="why-row">
+            <div class="why-number">Why 3</div>
+            <div class="why-arrow">→</div>
+            <div contenteditable="true" class="editable why-answer" data-key="why3"
+              >Roles and responsibilities for Procore data management were never formally defined.</div>
+          </div>
+          <div class="why-row">
+            <div class="why-number">Why 4</div>
+            <div class="why-arrow">→</div>
+            <div contenteditable="true" class="editable why-answer" data-key="why4"
+              >The project kick-off did not include a Procore onboarding or documentation workflow step.</div>
+          </div>
+          <div class="why-row">
+            <div class="why-number">Why 5</div>
+            <div class="why-arrow">→</div>
+            <div contenteditable="true" class="editable why-answer" data-key="why5" id="why5Input"
+              >No organizational standard or template exists for Procore project setup and data governance.</div>
+          </div>
+        </div>
+
+        <div class="two-col-grid">
+          <div class="card highlighted-card">
+            <div class="card-label">🎯 Root Cause (from Why 5)</div>
+            <div id="rootCauseDisplay" class="root-cause-text">No organizational standard or template exists for Procore project setup and data governance.</div>
+          </div>
+          <div class="card">
+            <div class="card-label">✅ Corrective Action</div>
+            <div contenteditable="true" class="editable textarea-like" data-key="correctiveAction"
+              >Develop a standardized Procore project setup SOP that includes equipment data governance, assigned roles, upload templates, and a training program for all relevant staff.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== DATA COLLECTION PLAN ==================== -->
+      <section class="section" id="section-datacollection">
+        <div class="section-header">
+          <h1 class="section-title">📁 Data Collection Plan</h1>
+        </div>
+        <div class="card">
+          <div class="card-label">Data Collection Plan</div>
+          <div class="table-container">
+            <table class="data-table" id="dcpTable">
+              <thead>
+                <tr>
+                  <th>Outcome</th>
+                  <th>Indicator</th>
+                  <th>Data Collection Method</th>
+                  <th>When Will Data Be Collected</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="dcpTableBody">
+                <tr>
+                  <td contenteditable="true" class="editable">Time</td>
+                  <td contenteditable="true" class="editable">TAT, Cycle Time</td>
+                  <td contenteditable="true" class="editable">Line, System IT, Records</td>
+                  <td contenteditable="true" class="editable">Daily</td>
+                  <td><button class="btn-delete" onclick="deleteRow(this)">✕</button></td>
+                </tr>
+                <tr>
+                  <td contenteditable="true" class="editable">Data Accuracy</td>
+                  <td contenteditable="true" class="editable">Error Rate %</td>
+                  <td contenteditable="true" class="editable">Procore audit log review</td>
+                  <td contenteditable="true" class="editable">Weekly</td>
+                  <td><button class="btn-delete" onclick="deleteRow(this)">✕</button></td>
+                </tr>
+                <tr>
+                  <td contenteditable="true" class="editable">Coverage</td>
+                  <td contenteditable="true" class="editable">% Equipment Uploaded</td>
+                  <td contenteditable="true" class="editable">Procore vs. asset register comparison</td>
+                  <td contenteditable="true" class="editable">Bi-weekly</td>
+                  <td><button class="btn-delete" onclick="deleteRow(this)">✕</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <button class="btn-add" onclick="addDCPRow()">+ Add Row</button>
+        </div>
+      </section>
+
+      <!-- ==================== STAKEHOLDER ==================== -->
+      <section class="section" id="section-stakeholder">
+        <div class="section-header">
+          <h1 class="section-title">👥 Stakeholder Register</h1>
+        </div>
+        <div class="card">
+          <div class="card-label">Stakeholder Register</div>
+          <div class="table-container">
+            <table class="data-table stakeholder-table" id="stakeholderTable">
+              <thead>
+                <tr>
+                  <th>Stakeholder</th>
+                  <th>Power (1-5)</th>
+                  <th>Interest (1-5)</th>
+                  <th>Role in Project</th>
+                  <th>Their Requirements</th>
+                  <th>Project Requirements from Them</th>
+                  <th>Strategy</th>
+                  <th>Communication Process</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="stakeholderBody">
+                <tr>
+                  <td contenteditable="true" class="editable">Project Sponsor</td>
+                  <td contenteditable="true" class="editable">5</td>
+                  <td contenteditable="true" class="editable">4</td>
+                  <td contenteditable="true" class="editable">Approver / Champion</td>
+                  <td contenteditable="true" class="editable">On-time delivery, ROI visibility</td>
+                  <td contenteditable="true" class="editable">Budget approval, direction</td>
+                  <td contenteditable="true" class="editable">Keep informed, escalate blockers</td>
+                  <td contenteditable="true" class="editable">Bi-weekly status report</td>
+                  <td><button class="btn-delete" onclick="deleteRow(this)">✕</button></td>
+                </tr>
+                <tr>
+                  <td contenteditable="true" class="editable">Procore Admin</td>
+                  <td contenteditable="true" class="editable">3</td>
+                  <td contenteditable="true" class="editable">5</td>
+                  <td contenteditable="true" class="editable">Technical SME</td>
+                  <td contenteditable="true" class="editable">Correct data structure</td>
+                  <td contenteditable="true" class="editable">System access, config support</td>
+                  <td contenteditable="true" class="editable">Collaborate closely</td>
+                  <td contenteditable="true" class="editable">Weekly 1:1 meetings</td>
+                  <td><button class="btn-delete" onclick="deleteRow(this)">✕</button></td>
+                </tr>
+                <tr>
+                  <td contenteditable="true" class="editable">Field Engineers</td>
+                  <td contenteditable="true" class="editable">2</td>
+                  <td contenteditable="true" class="editable">3</td>
+                  <td contenteditable="true" class="editable">End Users</td>
+                  <td contenteditable="true" class="editable">Simple, fast process</td>
+                  <td contenteditable="true" class="editable">Data input, feedback</td>
+                  <td contenteditable="true" class="editable">Involve in pilot design</td>
+                  <td contenteditable="true" class="editable">Email + Teams updates</td>
+                  <td><button class="btn-delete" onclick="deleteRow(this)">✕</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <button class="btn-add" onclick="addStakeholderRow()">+ Add Stakeholder</button>
+        </div>
+      </section>
+
+      <!-- ==================== SIPOC ==================== -->
+      <section class="section" id="section-sipoc">
+        <div class="section-header">
+          <h1 class="section-title">🔄 SIPOC Diagram</h1>
+        </div>
+        <div class="card">
+          <div class="card-label">SIPOC — Suppliers · Inputs · Process · Outputs · Customers</div>
+          <div class="table-container">
+            <table class="data-table sipoc-table" id="sipocTable">
+              <thead>
+                <tr>
+                  <th class="sipoc-s">Suppliers</th>
+                  <th class="sipoc-i">Inputs</th>
+                  <th class="sipoc-p">Process</th>
+                  <th class="sipoc-o">Outputs</th>
+                  <th class="sipoc-c">Customers</th>
+                </tr>
+              </thead>
+              <tbody id="sipocBody">
+                <tr>
+                  <td contenteditable="true" class="editable">Procurement Team</td>
+                  <td contenteditable="true" class="editable">Equipment specs & data sheets</td>
+                  <td contenteditable="true" class="editable">1. Collect equipment data from source</td>
+                  <td contenteditable="true" class="editable">Completed Procore equipment records</td>
+                  <td contenteditable="true" class="editable">Project Managers</td>
+                </tr>
+                <tr>
+                  <td contenteditable="true" class="editable">Field Engineers</td>
+                  <td contenteditable="true" class="editable">Asset register / inventory list</td>
+                  <td contenteditable="true" class="editable">2. Populate upload template</td>
+                  <td contenteditable="true" class="editable">Updated asset register in Procore</td>
+                  <td contenteditable="true" class="editable">Field Engineers</td>
+                </tr>
+                <tr>
+                  <td contenteditable="true" class="editable">Procore Admin</td>
+                  <td contenteditable="true" class="editable">Upload template (standardized)</td>
+                  <td contenteditable="true" class="editable">3. QA/QC data review</td>
+                  <td contenteditable="true" class="editable">QA-verified data report</td>
+                  <td contenteditable="true" class="editable">Executives / Sponsor</td>
+                </tr>
+                <tr>
+                  <td contenteditable="true" class="editable">IT / Systems</td>
+                  <td contenteditable="true" class="editable">Procore access credentials</td>
+                  <td contenteditable="true" class="editable">4. Upload to Procore system</td>
+                  <td contenteditable="true" class="editable">Audit trail / upload log</td>
+                  <td contenteditable="true" class="editable">Procore Admin</td>
+                </tr>
+                <tr>
+                  <td contenteditable="true" class="editable">Training Team</td>
+                  <td contenteditable="true" class="editable">SOP and training materials</td>
+                  <td contenteditable="true" class="editable">5. Confirm and close record</td>
+                  <td contenteditable="true" class="editable">Trained staff, documented SOP</td>
+                  <td contenteditable="true" class="editable">Future Project Teams</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== ACTIONS ==================== -->
+      <section class="section" id="section-actions">
+        <div class="section-header">
+          <h1 class="section-title">✅ Action Tracker</h1>
+        </div>
+
+        <div class="action-controls card">
+          <div class="action-filters">
+            <button class="filter-btn active" data-filter="All">All</button>
+            <button class="filter-btn" data-filter="Open">Open</button>
+            <button class="filter-btn" data-filter="In Progress">In Progress</button>
+            <button class="filter-btn" data-filter="Done">Done</button>
+          </div>
+          <div class="action-progress-wrap">
+            <span class="progress-label" id="actionProgressLabel">0% Complete</span>
+            <div class="progress-bar-track">
+              <div class="progress-bar-fill" id="actionProgressFill" style="width:0%"></div>
+            </div>
+          </div>
+          <button class="btn-add" onclick="openActionForm()">+ Add Action</button>
+        </div>
+
+        <div id="actionForm" class="card action-form hidden">
+          <div class="card-label">New Action Item</div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Action Item</label>
+              <input type="text" id="newActionItem" placeholder="Describe the action..." />
+            </div>
+            <div class="form-group">
+              <label>Owner</label>
+              <input type="text" id="newActionOwner" placeholder="Name..." />
+            </div>
+            <div class="form-group">
+              <label>Due Date</label>
+              <input type="date" id="newActionDue" />
+            </div>
+            <div class="form-group">
+              <label>Priority</label>
+              <select id="newActionPriority">
+                <option>High</option>
+                <option selected>Med</option>
+                <option>Low</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Notes</label>
+              <input type="text" id="newActionNotes" placeholder="Optional notes..." />
+            </div>
+          </div>
+          <div class="form-actions">
+            <button class="btn-add" onclick="saveAction()">Save Action</button>
+            <button class="btn-cancel" onclick="closeActionForm()">Cancel</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="table-container">
+            <table class="data-table" id="actionsTable">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Action Item</th>
+                  <th>Owner</th>
+                  <th>Due Date</th>
+                  <th>Priority</th>
+                  <th>Status</th>
+                  <th>Notes</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="actionsBody">
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== TIMELINE ==================== -->
+      <section class="section" id="section-timeline">
+        <div class="section-header">
+          <h1 class="section-title">📅 Project Timeline</h1>
+        </div>
+
+        <div class="card">
+          <div class="card-label">Visual Timeline</div>
+          <div class="timeline-visual" id="timelineVisual"></div>
+        </div>
+
+        <div class="card">
+          <div class="card-label">Milestones</div>
+          <div class="table-container">
+            <table class="data-table" id="milestonesTable">
+              <thead>
+                <tr>
+                  <th>Milestone</th>
+                  <th>Phase</th>
+                  <th>Target Date</th>
+                  <th>Actual Date</th>
+                  <th>Status</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="milestonesBody">
+              </tbody>
+            </table>
+          </div>
+          <button class="btn-add" onclick="addMilestone()">+ Add Milestone</button>
+        </div>
+      </section>
+
+      <!-- ==================== MEETINGS ==================== -->
+      <section class="section" id="section-meetings">
+        <div class="section-header">
+          <h1 class="section-title">📝 Meeting Log</h1>
+        </div>
+
+        <div class="card" style="margin-bottom:1.5rem;">
+          <button class="btn-add" onclick="openMeetingForm()">+ Add Meeting</button>
+        </div>
+
+        <div id="meetingForm" class="card meeting-form hidden">
+          <div class="card-label">New Meeting Entry</div>
+          <div class="form-grid meeting-form-grid">
+            <div class="form-group">
+              <label>Date</label>
+              <input type="date" id="mDate" />
+            </div>
+            <div class="form-group">
+              <label>Attendees</label>
+              <input type="text" id="mAttendees" placeholder="Comma separated..." />
+            </div>
+            <div class="form-group form-full">
+              <label>Agenda</label>
+              <textarea id="mAgenda" rows="2" placeholder="Meeting agenda..."></textarea>
+            </div>
+            <div class="form-group form-full">
+              <label>Key Decisions</label>
+              <textarea id="mDecisions" rows="2" placeholder="Decisions made..."></textarea>
+            </div>
+            <div class="form-group form-full">
+              <label>Action Items</label>
+              <textarea id="mActions" rows="2" placeholder="Actions arising..."></textarea>
+            </div>
+            <div class="form-group">
+              <label>Next Meeting Date</label>
+              <input type="date" id="mNext" />
+            </div>
+          </div>
+          <div class="form-actions">
+            <button class="btn-add" onclick="saveMeeting()">Save Meeting</button>
+            <button class="btn-cancel" onclick="closeMeetingForm()">Cancel</button>
+          </div>
+        </div>
+
+        <div id="meetingsList"></div>
+      </section>
+
+      <!-- ==================== DEFINE SUB-SECTIONS ==================== -->
+      <section class="section" id="section-project-charter">
+        <div class="section-header">
+          <div class="breadcrumb"><span class="bc-phase define-text">Define</span> <span class="bc-sep">›</span> Project Charter</div>
+          <h1 class="section-title">📄 Project Charter</h1>
+        </div>
+        <div class="two-col-grid">
+          <div class="card"><div class="card-label">Problem Statement</div><div contenteditable="true" class="editable textarea-like" data-key="charter_problem">Substation equipment data is not being systematically uploaded into Procore, leading to gaps in project documentation and increased risk of data loss.</div></div>
+          <div class="card"><div class="card-label">Objectives</div><div contenteditable="true" class="editable textarea-like" data-key="charter_objectives">Establish a standardized, repeatable upload process. Achieve 100% equipment coverage in Procore. Reduce data entry errors by ≥50%.</div></div>
+        </div>
+        <div class="two-col-grid">
+          <div class="card"><div class="card-label">Business Benefit</div><div contenteditable="true" class="editable textarea-like" data-key="charter_benefit">Improved documentation quality, real-time visibility for stakeholders, reduced rework, and improved compliance with project delivery standards.</div></div>
+          <div class="card"><div class="card-label">Scope</div><div contenteditable="true" class="editable textarea-like" data-key="charter_scope">All substation equipment types. Upload template development, QA/QC process, training materials, and SOP documentation.</div></div>
+        </div>
+        <div class="card"><div class="card-label">Plan / Timeline</div><div contenteditable="true" class="editable textarea-like" data-key="charter_plan">Week 1–2: Define scope and map current process&#10;Week 3–4: Develop template and SOP&#10;Week 5–6: Pilot with one project&#10;Week 7–8: Refine and train team&#10;Week 9–10: Full rollout and handoff</div></div>
+      </section>
+
+      <section class="section" id="section-team-launch">
+        <div class="section-header">
+          <div class="breadcrumb"><span class="bc-phase define-text">Define</span> <span class="bc-sep">›</span> Team Launch</div>
+          <h1 class="section-title">👥 Team Launch</h1>
+        </div>
+        <div class="card"><div class="card-label">Team Members &amp; RACI</div>
+          <div class="table-container">
+            <table class="data-table">
+              <thead><tr><th>Name</th><th>Role</th><th>Department</th><th>R/A/C/I</th><th>Contact</th></tr></thead>
+              <tbody id="teamLaunchBody">
+                <tr><td contenteditable="true" class="editable">Aaron Kapustin</td><td contenteditable="true" class="editable">Project Lead / Intern</td><td contenteditable="true" class="editable">Project Management</td><td contenteditable="true" class="editable">R/A</td><td contenteditable="true" class="editable">—</td></tr>
+                <tr><td contenteditable="true" class="editable">TBD — Manager</td><td contenteditable="true" class="editable">Sponsor</td><td contenteditable="true" class="editable">Engineering</td><td contenteditable="true" class="editable">A</td><td contenteditable="true" class="editable">—</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <button class="btn-add" onclick="addGenericRow('teamLaunchBody', 5)">+ Add Member</button>
+        </div>
+        <div class="two-col-grid">
+          <div class="card"><div class="card-label">Team Mandate</div><div contenteditable="true" class="editable textarea-like" data-key="team_mandate">Develop and implement a standardized process for uploading substation equipment into Procore, delivering measurable improvements in data quality and team compliance.</div></div>
+          <div class="card"><div class="card-label">Meeting Criteria / Cadence</div><div contenteditable="true" class="editable textarea-like" data-key="team_meetings">Weekly team check-in — 30 mins&#10;Bi-weekly stakeholder update — 15 mins&#10;Monthly manager review</div></div>
+        </div>
+      </section>
+
+      <section class="section" id="section-project-planning">
+        <div class="section-header">
+          <div class="breadcrumb"><span class="bc-phase define-text">Define</span> <span class="bc-sep">›</span> Project Planning</div>
+          <h1 class="section-title">📅 Project Planning</h1>
+        </div>
+        <div class="two-col-grid">
+          <div class="card"><div class="card-label">Budget</div><div contenteditable="true" class="editable textarea-like" data-key="plan_budget">Internal resources only (intern time + manager review). No external spend required for planning phase. Tools: Procore (existing licence), MS Office.</div></div>
+          <div class="card"><div class="card-label">Time &amp; Resources</div><div contenteditable="true" class="editable textarea-like" data-key="plan_time">Estimated 10 weeks · Intern: ~15 hrs/week · Manager review: ~2 hrs/week · Pilot team: ~4 hrs total</div></div>
+        </div>
+        <div class="card"><div class="card-label">Scope Boundaries</div><div contenteditable="true" class="editable textarea-like" data-key="plan_scope">In Scope: upload process, templates, SOP, training&#10;Out of Scope: Procore configuration changes, procurement, non-substation equipment, IT infrastructure</div></div>
+      </section>
+
+      <section class="section" id="section-voc">
+        <div class="section-header">
+          <div class="breadcrumb"><span class="bc-phase define-text">Define</span> <span class="bc-sep">›</span> Voice of Customer</div>
+          <h1 class="section-title">🗣 Voice of Customer (VOC)</h1>
+        </div>
+        <div class="card"><div class="card-label">VOC Gathering — Customer Feedback &amp; Requirements</div>
+          <div class="table-container">
+            <table class="data-table">
+              <thead><tr><th>Customer / Stakeholder</th><th>Voice (what they said)</th><th>Need (translated)</th><th>CTQ (Critical to Quality)</th></tr></thead>
+              <tbody id="vocBody">
+                <tr><td contenteditable="true" class="editable">Project Manager</td><td contenteditable="true" class="editable">I need to see all equipment in Procore in real time</td><td contenteditable="true" class="editable">Real-time data visibility</td><td contenteditable="true" class="editable">100% equipment records in Procore within 24hrs of receipt</td></tr>
+                <tr><td contenteditable="true" class="editable">Field Engineer</td><td contenteditable="true" class="editable">The upload process takes too long and is confusing</td><td contenteditable="true" class="editable">Simple, fast process</td><td contenteditable="true" class="editable">Upload time ≤10 mins per equipment item</td></tr>
+                <tr><td contenteditable="true" class="editable">Operations Team</td><td contenteditable="true" class="editable">We need accurate data for handover</td><td contenteditable="true" class="editable">Data accuracy</td><td contenteditable="true" class="editable">Error rate &lt;5% at handover</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <button class="btn-add" onclick="addGenericRow('vocBody', 4)">+ Add Row</button>
+        </div>
+        <div class="card"><div class="card-label">CTQ Tree — Key Quality Requirements</div><div contenteditable="true" class="editable textarea-like" data-key="voc_ctq">Speed: Upload completion within 24 hours of equipment receipt&#10;Accuracy: ≤5% data error rate&#10;Completeness: 100% required fields populated&#10;Usability: Process completable by any field engineer without specialist support</div></div>
+      </section>
+
+      <!-- ==================== MEASURE SUB-SECTIONS ==================== -->
+      <section class="section" id="section-process-mapping">
+        <div class="section-header">
+          <div class="breadcrumb"><span class="bc-phase measure-text">Measure</span> <span class="bc-sep">›</span> Process Mapping</div>
+          <h1 class="section-title">🗺 Process Mapping</h1>
+        </div>
+        <div class="card"><div class="card-label">Current State Process Steps</div>
+          <div class="table-container">
+            <table class="data-table">
+              <thead><tr><th>#</th><th>Process Step</th><th>Who</th><th>Time (mins)</th><th>Value Add?</th><th>Pain Points</th></tr></thead>
+              <tbody id="processMapBody">
+                <tr><td contenteditable="true" class="editable">1</td><td contenteditable="true" class="editable">Equipment arrives on site</td><td contenteditable="true" class="editable">Field Engineer</td><td contenteditable="true" class="editable">—</td><td contenteditable="true" class="editable">Yes</td><td contenteditable="true" class="editable">—</td></tr>
+                <tr><td contenteditable="true" class="editable">2</td><td contenteditable="true" class="editable">Data recorded in Excel manually</td><td contenteditable="true" class="editable">Field Engineer</td><td contenteditable="true" class="editable">30</td><td contenteditable="true" class="editable">Partial</td><td contenteditable="true" class="editable">Inconsistent fields, no template</td></tr>
+                <tr><td contenteditable="true" class="editable">3</td><td contenteditable="true" class="editable">Excel sent to PM via email</td><td contenteditable="true" class="editable">Field Engineer</td><td contenteditable="true" class="editable">5</td><td contenteditable="true" class="editable">No</td><td contenteditable="true" class="editable">Version control issues</td></tr>
+                <tr><td contenteditable="true" class="editable">4</td><td contenteditable="true" class="editable">PM manually uploads to Procore (ad hoc)</td><td contenteditable="true" class="editable">PM</td><td contenteditable="true" class="editable">45</td><td contenteditable="true" class="editable">Partial</td><td contenteditable="true" class="editable">Not consistent, often delayed or skipped</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <button class="btn-add" onclick="addGenericRow('processMapBody', 6)">+ Add Step</button>
+        </div>
+        <div class="two-col-grid">
+          <div class="card"><div class="card-label">Macro Process Overview</div><div contenteditable="true" class="editable textarea-like" data-key="pm_macro">Equipment Arrival → Data Capture → Data Review → Procore Upload → Verification</div></div>
+          <div class="card"><div class="card-label">Key Observations / Quick Wins</div><div contenteditable="true" class="editable textarea-like" data-key="pm_observations">1. No standard template exists — create one immediately&#10;2. Upload is done by PM not field engineer — reassign ownership&#10;3. No QA step — add verification checkpoint</div></div>
+        </div>
+      </section>
+
+      <section class="section" id="section-vsm">
+        <div class="section-header">
+          <div class="breadcrumb"><span class="bc-phase measure-text">Measure</span> <span class="bc-sep">›</span> Value Stream Mapping</div>
+          <h1 class="section-title">📊 Value Stream Mapping</h1>
+        </div>
+        <div class="two-col-grid">
+          <div class="card"><div class="card-label">Current State (TIMWOOD Wastes Identified)</div><div contenteditable="true" class="editable textarea-like" data-key="vsm_current">T — Transport: Excel files emailed between teams&#10;I — Inventory: Equipment data sitting in Excel for days before upload&#10;M — Motion: PM re-entering data already captured by field engineer&#10;W — Waiting: Upload delayed while PM is busy&#10;O — Over-processing: Data entered in Excel AND Procore&#10;O — Over-production: Multiple versions of spreadsheet created&#10;D — Defects: Incorrect/missing fields due to no template</div></div>
+          <div class="card"><div class="card-label">Future State Vision</div><div contenteditable="true" class="editable textarea-like" data-key="vsm_future">Field engineer uses standardised template → data captured once → direct upload to Procore → automated QA check → PM notified → record confirmed. Eliminate double-entry and email chain.</div></div>
+        </div>
+        <div class="card"><div class="card-label">Cycle Time Analysis</div>
+          <div class="table-container">
+            <table class="data-table">
+              <thead><tr><th>Step</th><th>Current Cycle Time</th><th>Target Cycle Time</th><th>Waste Type</th></tr></thead>
+              <tbody id="vsmBody">
+                <tr><td contenteditable="true" class="editable">Data capture</td><td contenteditable="true" class="editable">30 mins</td><td contenteditable="true" class="editable">15 mins</td><td contenteditable="true" class="editable">Over-processing</td></tr>
+                <tr><td contenteditable="true" class="editable">Email to PM</td><td contenteditable="true" class="editable">1–2 days wait</td><td contenteditable="true" class="editable">0 (direct upload)</td><td contenteditable="true" class="editable">Waiting, Transport</td></tr>
+                <tr><td contenteditable="true" class="editable">Procore upload</td><td contenteditable="true" class="editable">45 mins</td><td contenteditable="true" class="editable">10 mins</td><td contenteditable="true" class="editable">Motion, Defects</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <button class="btn-add" onclick="addGenericRow('vsmBody', 4)">+ Add Row</button>
+        </div>
+      </section>
+
+      <section class="section" id="section-msa">
+        <div class="section-header">
+          <div class="breadcrumb"><span class="bc-phase measure-text">Measure</span> <span class="bc-sep">›</span> Measurement System Analysis</div>
+          <h1 class="section-title">🔬 Measurement System Analysis (MSA)</h1>
+        </div>
+        <div class="two-col-grid">
+          <div class="card"><div class="card-label">What Are We Measuring?</div><div contenteditable="true" class="editable textarea-like" data-key="msa_what">1. Upload completion rate (% of equipment in Procore vs. site register)&#10;2. Data accuracy rate (% of records with all required fields correctly filled)&#10;3. Upload cycle time (minutes from equipment receipt to Procore confirmation)</div></div>
+          <div class="card"><div class="card-label">Measurement Method</div><div contenteditable="true" class="editable textarea-like" data-key="msa_method">1. Procore vs. physical asset register comparison — weekly&#10;2. Random audit of 10% of records — spot check required fields&#10;3. Timestamp tracking from equipment receipt form to Procore entry</div></div>
+        </div>
+        <div class="card"><div class="card-label">GRR Assessment (Gauge Repeatability &amp; Reproducibility)</div><div contenteditable="true" class="editable textarea-like" data-key="msa_grr">Repeatability: Same person measuring twice — confirm same result&#10;Reproducibility: Two different people measuring same item&#10;Accuracy: Compare against known baseline (100% manually verified records)&#10;Stability: Check over 4-week period to detect drift</div></div>
+      </section>
+
+      <section class="section" id="section-baseline">
+        <div class="section-header">
+          <div class="breadcrumb"><span class="bc-phase measure-text">Measure</span> <span class="bc-sep">›</span> Baseline Calculation</div>
+          <h1 class="section-title">📉 Baseline Calculation</h1>
+        </div>
+        <div class="card"><div class="card-label">Baseline Metrics</div>
+          <div class="table-container">
+            <table class="data-table">
+              <thead><tr><th>Metric</th><th>Baseline Value</th><th>Target</th><th>Measurement Method</th><th>Notes</th></tr></thead>
+              <tbody id="baselineBody">
+                <tr><td contenteditable="true" class="editable">% Equipment in Procore</td><td contenteditable="true" class="editable">TBD — measure week 1</td><td contenteditable="true" class="editable">100%</td><td contenteditable="true" class="editable">Procore vs. site register</td><td contenteditable="true" class="editable">—</td></tr>
+                <tr><td contenteditable="true" class="editable">Data Error Rate</td><td contenteditable="true" class="editable">TBD — audit sample</td><td contenteditable="true" class="editable">≤5%</td><td contenteditable="true" class="editable">Random 10% record audit</td><td contenteditable="true" class="editable">—</td></tr>
+                <tr><td contenteditable="true" class="editable">Upload Cycle Time</td><td contenteditable="true" class="editable">TBD — time current process</td><td contenteditable="true" class="editable">≤10 mins</td><td contenteditable="true" class="editable">Timestamp tracking</td><td contenteditable="true" class="editable">—</td></tr>
+                <tr><td contenteditable="true" class="editable">FPT (First Pass Throughput)</td><td contenteditable="true" class="editable">TBD</td><td contenteditable="true" class="editable">≥90%</td><td contenteditable="true" class="editable">QA checklist pass rate</td><td contenteditable="true" class="editable">—</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <button class="btn-add" onclick="addGenericRow('baselineBody', 5)">+ Add Metric</button>
+        </div>
+      </section>
+
+      <!-- ==================== ANALYSE SUB-SECTIONS ==================== -->
+      <section class="section" id="section-brainstorm">
+        <div class="section-header">
+          <div class="breadcrumb"><span class="bc-phase analyse-text">Analyse</span> <span class="bc-sep">›</span> Brainstorm / 4Fs</div>
+          <h1 class="section-title">🧠 Brainstorm / 4Fs</h1>
+        </div>
+        <div class="card"><div class="card-label">Problem / Main Cause Statement</div><div contenteditable="true" class="editable textarea-like" data-key="brain_problem">No standardized process exists for uploading substation equipment data into Procore, resulting in incomplete, inaccurate, and delayed records.</div></div>
+        <div class="two-col-grid">
+          <div class="card"><div class="card-label">Force (Driving Forces)</div><div contenteditable="true" class="editable textarea-like" data-key="brain_force">- Management pressure to improve documentation quality&#10;- Upcoming project handover requiring complete Procore records&#10;- Audit requirements&#10;- New team members needing clear guidance</div></div>
+          <div class="card"><div class="card-label">Free Flight (All ideas — no filtering)</div><div contenteditable="true" class="editable textarea-like" data-key="brain_freeflght">- Build a Procore template&#10;- Assign a dedicated data entry person&#10;- Create a QR code scan system for equipment&#10;- Weekly upload check-in meeting&#10;- Automated reminder emails&#10;- Training video for field engineers&#10;- Buddy system for new starters&#10;- Equipment barcode scanning</div></div>
+        </div>
+        <div class="two-col-grid">
+          <div class="card"><div class="card-label">Factor (Root contributing factors)</div><div contenteditable="true" class="editable textarea-like" data-key="brain_factor">- No template or SOP&#10;- No ownership assigned&#10;- Lack of training&#10;- Competing priorities&#10;- System access issues</div></div>
+          <div class="card"><div class="card-label">Formulate (Priority solutions)</div><div contenteditable="true" class="editable textarea-like" data-key="brain_formulate">1. Develop standardised upload template&#10;2. Create SOP with step-by-step instructions&#10;3. Assign upload ownership to field engineer role&#10;4. Deliver 30-min Procore training session&#10;5. Implement weekly QA spot check</div></div>
+        </div>
+      </section>
+
+      <section class="section" id="section-ce-matrix">
+        <div class="section-header">
+          <div class="breadcrumb"><span class="bc-phase analyse-text">Analyse</span> <span class="bc-sep">›</span> Cause &amp; Effect Matrix</div>
+          <h1 class="section-title">⚖ Cause &amp; Effect Matrix</h1>
+        </div>
+        <div class="card"><div class="card-label">C&amp;E Matrix — Rate impact of each X on each Y (1–10)</div>
+          <div class="table-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Input (X)</th>
+                  <th>Y1: Upload Completeness</th>
+                  <th>Y2: Data Accuracy</th>
+                  <th>Y3: Cycle Time</th>
+                  <th>Total Score</th>
+                  <th>Priority</th>
+                </tr>
+              </thead>
+              <tbody id="ceMatrixBody">
+                <tr><td contenteditable="true" class="editable">No standardized template</td><td contenteditable="true" class="editable">9</td><td contenteditable="true" class="editable">9</td><td contenteditable="true" class="editable">7</td><td contenteditable="true" class="editable">25</td><td contenteditable="true" class="editable">🔴 High</td></tr>
+                <tr><td contenteditable="true" class="editable">No assigned ownership</td><td contenteditable="true" class="editable">9</td><td contenteditable="true" class="editable">7</td><td contenteditable="true" class="editable">8</td><td contenteditable="true" class="editable">24</td><td contenteditable="true" class="editable">🔴 High</td></tr>
+                <tr><td contenteditable="true" class="editable">No training</td><td contenteditable="true" class="editable">7</td><td contenteditable="true" class="editable">8</td><td contenteditable="true" class="editable">6</td><td contenteditable="true" class="editable">21</td><td contenteditable="true" class="editable">🟡 Med</td></tr>
+                <tr><td contenteditable="true" class="editable">System access issues</td><td contenteditable="true" class="editable">6</td><td contenteditable="true" class="editable">4</td><td contenteditable="true" class="editable">8</td><td contenteditable="true" class="editable">18</td><td contenteditable="true" class="editable">🟡 Med</td></tr>
+                <tr><td contenteditable="true" class="editable">Competing priorities</td><td contenteditable="true" class="editable">5</td><td contenteditable="true" class="editable">3</td><td contenteditable="true" class="editable">7</td><td contenteditable="true" class="editable">15</td><td contenteditable="true" class="editable">🟢 Low</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <button class="btn-add" onclick="addGenericRow('ceMatrixBody', 6)">+ Add Row</button>
+        </div>
+      </section>
+
+      <section class="section" id="section-fmea">
+        <div class="section-header">
+          <div class="breadcrumb"><span class="bc-phase analyse-text">Analyse</span> <span class="bc-sep">›</span> FMEA</div>
+          <h1 class="section-title">⚠ FMEA — Failure Mode &amp; Effects Analysis</h1>
+        </div>
+        <div class="card"><div class="card-label">FMEA Table — RPN = Severity × Occurrence × Detection</div>
+          <div class="table-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Process Step</th>
+                  <th>Failure Mode</th>
+                  <th>Effect</th>
+                  <th>Severity (1–10)</th>
+                  <th>Cause</th>
+                  <th>Occurrence (1–10)</th>
+                  <th>Detection (1–10)</th>
+                  <th>RPN</th>
+                  <th>Action Required</th>
+                </tr>
+              </thead>
+              <tbody id="fmeaBody">
+                <tr><td contenteditable="true" class="editable">Data Capture</td><td contenteditable="true" class="editable">Missing required fields</td><td contenteditable="true" class="editable">Incomplete Procore record</td><td contenteditable="true" class="editable">8</td><td contenteditable="true" class="editable">No template</td><td contenteditable="true" class="editable">8</td><td contenteditable="true" class="editable">6</td><td contenteditable="true" class="editable">384</td><td contenteditable="true" class="editable">Create mandatory field template</td></tr>
+                <tr><td contenteditable="true" class="editable">Upload</td><td contenteditable="true" class="editable">Upload not performed</td><td contenteditable="true" class="editable">No record in Procore</td><td contenteditable="true" class="editable">9</td><td contenteditable="true" class="editable">No ownership</td><td contenteditable="true" class="editable">7</td><td contenteditable="true" class="editable">5</td><td contenteditable="true" class="editable">315</td><td contenteditable="true" class="editable">Assign role accountability</td></tr>
+                <tr><td contenteditable="true" class="editable">QA Review</td><td contenteditable="true" class="editable">Errors not caught</td><td contenteditable="true" class="editable">Bad data persists in Procore</td><td contenteditable="true" class="editable">7</td><td contenteditable="true" class="editable">No QA step</td><td contenteditable="true" class="editable">6</td><td contenteditable="true" class="editable">7</td><td contenteditable="true" class="editable">294</td><td contenteditable="true" class="editable">Implement QA checklist</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <button class="btn-add" onclick="addGenericRow('fmeaBody', 9)">+ Add Row</button>
+        </div>
+      </section>
+
+      <!-- ==================== IMPROVE SUB-SECTIONS ==================== -->
+      <section class="section" id="section-improvement-plan">
+        <div class="section-header">
+          <div class="breadcrumb"><span class="bc-phase improve-text">Improve</span> <span class="bc-sep">›</span> Improvement Plan</div>
+          <h1 class="section-title">📝 Improvement Plan</h1>
+        </div>
+        <div class="card"><div class="card-label">Improvement Actions</div>
+          <div class="table-container">
+            <table class="data-table">
+              <thead><tr><th>Action</th><th>Type</th><th>Owner</th><th>Due Date</th><th>Status</th><th>Expected Impact</th></tr></thead>
+              <tbody id="improveBody">
+                <tr><td contenteditable="true" class="editable">Design standardized upload template</td><td contenteditable="true" class="editable">Internal</td><td contenteditable="true" class="editable">Aaron K.</td><td contenteditable="true" class="editable">TBD</td><td contenteditable="true" class="editable">Not Started</td><td contenteditable="true" class="editable">Reduce data errors by 50%+</td></tr>
+                <tr><td contenteditable="true" class="editable">Write upload SOP</td><td contenteditable="true" class="editable">Internal</td><td contenteditable="true" class="editable">Aaron K.</td><td contenteditable="true" class="editable">TBD</td><td contenteditable="true" class="editable">Not Started</td><td contenteditable="true" class="editable">Standardise process</td></tr>
+                <tr><td contenteditable="true" class="editable">Assign upload ownership to field engineer role</td><td contenteditable="true" class="editable">Streamline</td><td contenteditable="true" class="editable">Manager</td><td contenteditable="true" class="editable">TBD</td><td contenteditable="true" class="editable">Not Started</td><td contenteditable="true" class="editable">Eliminate bottleneck</td></tr>
+                <tr><td contenteditable="true" class="editable">Deliver Procore training session</td><td contenteditable="true" class="editable">Internal</td><td contenteditable="true" class="editable">Aaron K.</td><td contenteditable="true" class="editable">TBD</td><td contenteditable="true" class="editable">Not Started</td><td contenteditable="true" class="editable">Upskill team</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <button class="btn-add" onclick="addGenericRow('improveBody', 6)">+ Add Action</button>
+        </div>
+      </section>
+
+      <section class="section" id="section-pilot">
+        <div class="section-header">
+          <div class="breadcrumb"><span class="bc-phase improve-text">Improve</span> <span class="bc-sep">›</span> Pilot Solution</div>
+          <h1 class="section-title">🧪 Pilot Solution</h1>
+        </div>
+        <div class="two-col-grid">
+          <div class="card"><div class="card-label">Pilot Scope</div><div contenteditable="true" class="editable textarea-like" data-key="pilot_scope">Run the new upload template and SOP on one substation project. Select 2 field engineers to participate. Run for 2 weeks and collect data on error rate, completion rate, and cycle time.</div></div>
+          <div class="card"><div class="card-label">Success Criteria</div><div contenteditable="true" class="editable textarea-like" data-key="pilot_success">- Upload completion rate ≥95%&#10;- Data error rate &lt;10%&#10;- Average upload time ≤15 mins&#10;- Participant feedback score ≥7/10</div></div>
+        </div>
+        <div class="two-col-grid">
+          <div class="card"><div class="card-label">Data Collected During Pilot</div><div contenteditable="true" class="editable textarea-like" data-key="pilot_data">To be completed during pilot phase.</div></div>
+          <div class="card"><div class="card-label">Lessons Learned</div><div contenteditable="true" class="editable textarea-like" data-key="pilot_lessons">To be completed after pilot phase.</div></div>
+        </div>
+      </section>
+
+      <section class="section" id="section-kaizen">
+        <div class="section-header">
+          <div class="breadcrumb"><span class="bc-phase improve-text">Improve</span> <span class="bc-sep">›</span> Kaizen / Full Scale</div>
+          <h1 class="section-title">✨ Kaizen / Full Scale Implementation</h1>
+        </div>
+        <div class="two-col-grid">
+          <div class="card"><div class="card-label">Objectives Achieved</div><div contenteditable="true" class="editable textarea-like" data-key="kaizen_objectives">To be completed at full rollout.</div></div>
+          <div class="card"><div class="card-label">Lessons Learned</div><div contenteditable="true" class="editable textarea-like" data-key="kaizen_lessons">To be completed at full rollout.</div></div>
+        </div>
+        <div class="card"><div class="card-label">Improvement Sharing Plan</div><div contenteditable="true" class="editable textarea-like" data-key="kaizen_share">How will this improvement be shared with other teams or future projects?&#10;&#10;- Document and publish SOP to shared drive&#10;- Present findings at team meeting&#10;- Submit improvement report to manager&#10;- Propose adoption for other equipment categories</div></div>
+      </section>
+
+      <!-- ==================== CONTROL SUB-SECTIONS ==================== -->
+      <section class="section" id="section-control-plan">
+        <div class="section-header">
+          <div class="breadcrumb"><span class="bc-phase control-text">Control</span> <span class="bc-sep">›</span> Control Plan</div>
+          <h1 class="section-title">📋 Control Plan</h1>
+        </div>
+        <div class="card"><div class="card-label">Control Measures</div>
+          <div class="table-container">
+            <table class="data-table">
+              <thead><tr><th>What to Control</th><th>Method</th><th>Frequency</th><th>Owner</th><th>Action if Out of Control</th></tr></thead>
+              <tbody id="controlBody">
+                <tr><td contenteditable="true" class="editable">Upload completion rate</td><td contenteditable="true" class="editable">Procore vs. site register comparison</td><td contenteditable="true" class="editable">Weekly</td><td contenteditable="true" class="editable">Field Engineer</td><td contenteditable="true" class="editable">Escalate to PM, complete missing records within 48hrs</td></tr>
+                <tr><td contenteditable="true" class="editable">Data accuracy</td><td contenteditable="true" class="editable">10% random record audit</td><td contenteditable="true" class="editable">Monthly</td><td contenteditable="true" class="editable">Aaron K. / PM</td><td contenteditable="true" class="editable">Corrective action + retrain if error rate &gt;5%</td></tr>
+                <tr><td contenteditable="true" class="editable">SOP adherence</td><td contenteditable="true" class="editable">Supervisor spot check</td><td contenteditable="true" class="editable">Monthly</td><td contenteditable="true" class="editable">Team Lead</td><td contenteditable="true" class="editable">Retrain, update SOP if needed</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <button class="btn-add" onclick="addGenericRow('controlBody', 5)">+ Add Row</button>
+        </div>
+        <div class="two-col-grid">
+          <div class="card"><div class="card-label">5S &amp; Visual Management</div><div contenteditable="true" class="editable textarea-like" data-key="control_5s">Sort: Remove outdated Excel files from shared drives&#10;Set in Order: Procore as single source of truth for equipment data&#10;Shine: Weekly data quality check routine&#10;Standardise: Template and SOP enforced for all uploads&#10;Sustain: Monthly audits + team accountability</div></div>
+          <div class="card"><div class="card-label">SOP Reference</div><div contenteditable="true" class="editable textarea-like" data-key="control_sop">SOP Title: Substation Equipment Upload to Procore&#10;Version: 1.0&#10;Owner: [Field Engineer Role]&#10;Review Date: [3 months after go-live]&#10;Location: [Shared drive / Procore document folder]</div></div>
+        </div>
+      </section>
+
+      <section class="section" id="section-closure">
+        <div class="section-header">
+          <div class="breadcrumb"><span class="bc-phase control-text">Control</span> <span class="bc-sep">›</span> Project Closure</div>
+          <h1 class="section-title">🏁 Project Closure</h1>
+        </div>
+        <div class="card"><div class="card-label">Closure Checklist</div>
+          <div class="checklist" id="closureChecklist">
+            <label class="check-item"><input type="checkbox" /> All KPIs measured and documented</label>
+            <label class="check-item"><input type="checkbox" /> SOP finalised and published</label>
+            <label class="check-item"><input type="checkbox" /> Team trained on new process</label>
+            <label class="check-item"><input type="checkbox" /> Control plan in place and owner assigned</label>
+            <label class="check-item"><input type="checkbox" /> Pilot results documented</label>
+            <label class="check-item"><input type="checkbox" /> Lessons learned captured</label>
+            <label class="check-item"><input type="checkbox" /> Improvement report submitted to manager</label>
+            <label class="check-item"><input type="checkbox" /> Sponsor sign-off received</label>
+            <label class="check-item"><input type="checkbox" /> Project documented in shared knowledge base</label>
+          </div>
+        </div>
+        <div class="two-col-grid">
+          <div class="card"><div class="card-label">Project Closure Report Summary</div><div contenteditable="true" class="editable textarea-like" data-key="closure_report">To be completed at project end. Summarise: what was achieved, KPIs vs. targets, key lessons, what was not completed and why, recommendations for future projects.</div></div>
+          <div class="card highlighted-card"><div class="card-label">🎉 Celebrate Success!</div><div contenteditable="true" class="editable textarea-like" data-key="closure_celebrate">Recognise the team's work. Share the improvement story. Present findings to the broader team. This project is an example of applying Six Sigma methodology in a real-world engineering environment.</div></div>
+        </div>
+      </section>
+
+      <!-- ==================== COLLECT DATA ==================== -->
+      <section class="section" id="section-collect-data">
+        <div class="section-header">
+          <div class="breadcrumb"><span class="bc-phase measure-text">Measure</span> <span class="bc-sep">›</span> Collect Data</div>
+          <h1 class="section-title">📥 Collect Data</h1>
+        </div>
+        <div class="card"><div class="card-label">Data Collected</div>
+          <div class="table-container">
+            <table class="data-table">
+              <thead><tr><th>Metric</th><th>Value Collected</th><th>Date</th><th>Source</th><th>Notes</th></tr></thead>
+              <tbody id="collectDataBody">
+                <tr><td contenteditable="true" class="editable">Cycle Time (upload)</td><td contenteditable="true" class="editable">TBD</td><td contenteditable="true" class="editable">—</td><td contenteditable="true" class="editable">Observation</td><td contenteditable="true" class="editable">—</td></tr>
+                <tr><td contenteditable="true" class="editable">FPT (First Pass Throughput)</td><td contenteditable="true" class="editable">TBD</td><td contenteditable="true" class="editable">—</td><td contenteditable="true" class="editable">Procore audit</td><td contenteditable="true" class="editable">—</td></tr>
+                <tr><td contenteditable="true" class="editable">RTY (Rolled Throughput Yield)</td><td contenteditable="true" class="editable">TBD</td><td contenteditable="true" class="editable">—</td><td contenteditable="true" class="editable">Record review</td><td contenteditable="true" class="editable">—</td></tr>
+                <tr><td contenteditable="true" class="editable">Process Capability (Cpk)</td><td contenteditable="true" class="editable">TBD</td><td contenteditable="true" class="editable">—</td><td contenteditable="true" class="editable">Statistical analysis</td><td contenteditable="true" class="editable">—</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <button class="btn-add" onclick="addGenericRow('collectDataBody', 5)">+ Add Row</button>
+        </div>
+        <div class="two-col-grid">
+          <div class="card"><div class="card-label">Collection Method &amp; Approach</div><div contenteditable="true" class="editable textarea-like" data-key="cd_method">Describe how data is being collected — observation, system export, manual log, etc.</div></div>
+          <div class="card"><div class="card-label">Key Observations</div><div contenteditable="true" class="editable textarea-like" data-key="cd_observations">Record any patterns, outliers, or surprises found during data collection.</div></div>
+        </div>
+      </section>
+
+      <!-- ==================== SCATTER PLOTS & REGRESSION ==================== -->
+      <section class="section" id="section-scatter-plots">
+        <div class="section-header">
+          <div class="breadcrumb"><span class="bc-phase analyse-text">Analyse</span> <span class="bc-sep">›</span> Scatter Plots &amp; Regression</div>
+          <h1 class="section-title">📈 Scatter Plots &amp; Regression</h1>
+        </div>
+        <div class="two-col-grid">
+          <div class="card"><div class="card-label">Pearson Correlation (r)</div><div contenteditable="true" class="editable textarea-like" data-key="scatter_pearson">r ≤ −0.5 or r ≥ 0.45 indicates a meaningful relationship between X and Y.&#10;&#10;Document your r values and what they tell you about the relationship between each input variable (X) and your output (Y).</div></div>
+          <div class="card"><div class="card-label">Regression Summary</div><div contenteditable="true" class="editable textarea-like" data-key="scatter_regression">Summarise the regression equation and what the model tells you about the key drivers of your output metric.&#10;&#10;e.g. Y = a + b·X — interpret the slope and intercept in the context of the process.</div></div>
+        </div>
+        <div class="card"><div class="card-label">X vs Y Correlation Table</div>
+          <div class="table-container">
+            <table class="data-table">
+              <thead><tr><th>Input X</th><th>Output Y</th><th>Pearson r</th><th>p-value</th><th>Significant?</th><th>Notes</th></tr></thead>
+              <tbody id="scatterBody">
+                <tr><td contenteditable="true" class="editable">Upload template used (Y/N)</td><td contenteditable="true" class="editable">Data error rate</td><td contenteditable="true" class="editable">TBD</td><td contenteditable="true" class="editable">TBD</td><td contenteditable="true" class="editable">TBD</td><td contenteditable="true" class="editable">—</td></tr>
+                <tr><td contenteditable="true" class="editable">Training completed (Y/N)</td><td contenteditable="true" class="editable">Upload cycle time</td><td contenteditable="true" class="editable">TBD</td><td contenteditable="true" class="editable">TBD</td><td contenteditable="true" class="editable">TBD</td><td contenteditable="true" class="editable">—</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <button class="btn-add" onclick="addGenericRow('scatterBody', 6)">+ Add Row</button>
+        </div>
+      </section>
+
+      <!-- ==================== SMED ==================== -->
+      <section class="section" id="section-smed">
+        <div class="section-header">
+          <div class="breadcrumb"><span class="bc-phase improve-text">Improve</span> <span class="bc-sep">›</span> SMED</div>
+          <h1 class="section-title">⚡ SMED — Single Minute Exchange of Die</h1>
+        </div>
+        <div class="two-col-grid">
+          <div class="card"><div class="card-label">Takt Time</div><div contenteditable="true" class="editable textarea-like" data-key="smed_takt">Takt Time = Available Production Time ÷ Customer Demand&#10;&#10;Calculate the rate at which the process must complete tasks to meet demand (e.g. uploads per day required).</div></div>
+          <div class="card"><div class="card-label">Kanban &amp; Pull System</div><div contenteditable="true" class="editable textarea-like" data-key="smed_kanban">Describe how a Kanban or pull system could be applied to the upload process — triggering uploads based on demand signals rather than batching.</div></div>
+        </div>
+        <div class="two-col-grid">
+          <div class="card"><div class="card-label">U-Shape Flow / Workflow Redesign</div><div contenteditable="true" class="editable textarea-like" data-key="smed_flow">Document how the workflow steps could be reorganised to reduce handoffs and improve flow. Consider U-shaped cell layout concepts applied to the information flow.</div></div>
+          <div class="card"><div class="card-label">Setup Reduction Actions</div><div contenteditable="true" class="editable textarea-like" data-key="smed_actions">List actions taken to reduce setup time — converting internal steps to external, eliminating adjustments, standardising the upload template to reduce prep time.</div></div>
+        </div>
+      </section>
+
+      <!-- ==================== CONTINUOUS FLOW ==================== -->
+      <section class="section" id="section-continuous-flow">
+        <div class="section-header">
+          <div class="breadcrumb"><span class="bc-phase improve-text">Improve</span> <span class="bc-sep">›</span> Continuous Flow</div>
+          <h1 class="section-title">🔁 Continuous Flow</h1>
+        </div>
+        <div class="two-col-grid">
+          <div class="card"><div class="card-label">Current Flow Issues</div><div contenteditable="true" class="editable textarea-like" data-key="cf_current">Describe the current bottlenecks, batching, and interruptions in the upload process that prevent smooth, continuous flow.</div></div>
+          <div class="card"><div class="card-label">Future State Flow Design</div><div contenteditable="true" class="editable textarea-like" data-key="cf_future">Design the future state where each upload step flows directly into the next with minimal waiting, batching, or rework. Describe the ideal one-piece flow for the process.</div></div>
+        </div>
+        <div class="card"><div class="card-label">Flow Improvement Actions</div>
+          <div class="table-container">
+            <table class="data-table">
+              <thead><tr><th>Waste / Blockage</th><th>Improvement Action</th><th>Owner</th><th>Due Date</th><th>Status</th></tr></thead>
+              <tbody id="cfBody">
+                <tr><td contenteditable="true" class="editable">Batching uploads at end of week</td><td contenteditable="true" class="editable">Daily upload cadence enforced by SOP</td><td contenteditable="true" class="editable">Field Engineer</td><td contenteditable="true" class="editable">TBD</td><td contenteditable="true" class="editable">Not Started</td></tr>
+                <tr><td contenteditable="true" class="editable">Email handoff delays</td><td contenteditable="true" class="editable">Direct upload — eliminate email step</td><td contenteditable="true" class="editable">Aaron K.</td><td contenteditable="true" class="editable">TBD</td><td contenteditable="true" class="editable">Not Started</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <button class="btn-add" onclick="addGenericRow('cfBody', 5)">+ Add Row</button>
+        </div>
+      </section>
+
+      <!-- ==================== FULL SCALE IMPLEMENTATION ==================== -->
+      <section class="section" id="section-full-scale">
+        <div class="section-header">
+          <div class="breadcrumb"><span class="bc-phase improve-text">Improve</span> <span class="bc-sep">›</span> Full Scale Implementation</div>
+          <h1 class="section-title">🚀 Full Scale Implementation</h1>
+        </div>
+        <div class="two-col-grid">
+          <div class="card"><div class="card-label">Implementation Scope</div><div contenteditable="true" class="editable textarea-like" data-key="fs_scope">Describe the full rollout plan — which teams, which projects, and which sites will adopt the new process. Include timeline and owner.</div></div>
+          <div class="card"><div class="card-label">Accelerated DMAIC</div><div contenteditable="true" class="editable textarea-like" data-key="fs_dmaic">If issues arise during full-scale rollout, apply an accelerated DMAIC cycle to resolve them quickly. Document any rapid improvement loops used here.</div></div>
+        </div>
+        <div class="card"><div class="card-label">Rollout Checklist</div>
+          <div class="checklist" id="fullScaleChecklist">
+            <label class="check-item"><input type="checkbox" /> SOP finalised and approved</label>
+            <label class="check-item"><input type="checkbox" /> Upload template distributed to all teams</label>
+            <label class="check-item"><input type="checkbox" /> Training sessions delivered to all users</label>
+            <label class="check-item"><input type="checkbox" /> Procore access confirmed for all team members</label>
+            <label class="check-item"><input type="checkbox" /> QA checklist implemented</label>
+            <label class="check-item"><input type="checkbox" /> First full-scale upload cycle completed</label>
+            <label class="check-item"><input type="checkbox" /> Post-rollout data collected and reviewed</label>
+          </div>
+        </div>
+        <div class="two-col-grid">
+          <div class="card"><div class="card-label">Results vs. Targets</div><div contenteditable="true" class="editable textarea-like" data-key="fs_results">To be completed after first full-scale cycle. Compare upload completion rate, error rate, and cycle time against targets.</div></div>
+          <div class="card"><div class="card-label">Lessons Learned</div><div contenteditable="true" class="editable textarea-like" data-key="fs_lessons">To be completed after rollout. Document what worked, what didn't, and what would be done differently.</div></div>
+        </div>
+      </section>
+
+      <!-- ==================== CONTROL MEASURES ==================== -->
+      <section class="section" id="section-control-measures">
+        <div class="section-header">
+          <div class="breadcrumb"><span class="bc-phase control-text">Control</span> <span class="bc-sep">›</span> Control Measures</div>
+          <h1 class="section-title">🛡 Control Measures</h1>
+        </div>
+        <div class="two-col-grid">
+          <div class="card"><div class="card-label">5S Implementation</div><div contenteditable="true" class="editable textarea-like" data-key="cm_5s">Sort: Remove all outdated Excel files and duplicate data sources&#10;Set in Order: Procore is the single source of truth — all links point here&#10;Shine: Weekly data quality review routine established&#10;Standardise: Upload template and SOP enforced across all projects&#10;Sustain: Monthly audits and team accountability meetings</div></div>
+          <div class="card"><div class="card-label">Visual Management</div><div contenteditable="true" class="editable textarea-like" data-key="cm_visual">Describe visual controls used to make performance visible — dashboards, status boards, colour coding in Procore, regular reporting cadence, etc.</div></div>
+        </div>
+        <div class="two-col-grid">
+          <div class="card"><div class="card-label">Poka-Yoke (Error Proofing)</div><div contenteditable="true" class="editable textarea-like" data-key="cm_pokayoke">Mandatory fields in Procore template to prevent incomplete records&#10;Validation rules to prevent incorrect data formats&#10;QA checklist as gate before record is marked complete</div></div>
+          <div class="card"><div class="card-label">Standardised Work Practices</div><div contenteditable="true" class="editable textarea-like" data-key="cm_sop">SOP Title: Substation Equipment Upload to Procore&#10;Version: 1.0 | Owner: [Field Engineer Role]&#10;Review Date: [3 months post go-live]&#10;Location: [Shared drive / Procore document folder]</div></div>
+        </div>
+      </section>
+
+      <!-- ==================== CLOSURE CHECKLIST ==================== -->
+      <section class="section" id="section-closure-checklist">
+        <div class="section-header">
+          <div class="breadcrumb"><span class="bc-phase control-text">Control</span> <span class="bc-sep">›</span> Project Closure Checklist</div>
+          <h1 class="section-title">☑ Project Closure Checklist</h1>
+        </div>
+        <div class="card"><div class="card-label">Closure Checklist — tick off each item before closing</div>
+          <div class="checklist" id="closureChecklistSection">
+            <label class="check-item"><input type="checkbox" /> All project objectives achieved and documented</label>
+            <label class="check-item"><input type="checkbox" /> All KPIs measured against targets</label>
+            <label class="check-item"><input type="checkbox" /> SOP finalised, approved and published</label>
+            <label class="check-item"><input type="checkbox" /> Training delivered to all relevant team members</label>
+            <label class="check-item"><input type="checkbox" /> Control plan in place with assigned owner</label>
+            <label class="check-item"><input type="checkbox" /> Pilot results documented</label>
+            <label class="check-item"><input type="checkbox" /> Lessons learned captured and shared</label>
+            <label class="check-item"><input type="checkbox" /> Improvement report submitted to manager</label>
+            <label class="check-item"><input type="checkbox" /> Sponsor sign-off received</label>
+            <label class="check-item"><input type="checkbox" /> Project documented in shared knowledge base</label>
+            <label class="check-item"><input type="checkbox" /> Improvement shared with wider organisation</label>
+          </div>
+        </div>
+        <div class="card"><div class="card-label">Notes / Outstanding Items</div><div contenteditable="true" class="editable textarea-like" data-key="cc_notes">Record any items that could not be fully completed and why, along with a handover plan for outstanding actions.</div></div>
+      </section>
+
+      <!-- ==================== CLOSURE REPORT ==================== -->
+      <section class="section" id="section-closure-report">
+        <div class="section-header">
+          <div class="breadcrumb"><span class="bc-phase control-text">Control</span> <span class="bc-sep">›</span> Project Closure Report</div>
+          <h1 class="section-title">📑 Project Closure Report</h1>
+        </div>
+        <div class="two-col-grid">
+          <div class="card"><div class="card-label">Summary of Achievements</div><div contenteditable="true" class="editable textarea-like" data-key="cr_achievements">Summarise what was delivered — the key outputs, process improvements, and measurable results achieved.</div></div>
+          <div class="card"><div class="card-label">KPIs — Actual vs. Target</div><div contenteditable="true" class="editable textarea-like" data-key="cr_kpis">Upload Completion Rate: Target 100% | Actual: TBD&#10;Data Error Rate: Target ≤5% | Actual: TBD&#10;Upload Cycle Time: Target ≤10 mins | Actual: TBD</div></div>
+        </div>
+        <div class="two-col-grid">
+          <div class="card"><div class="card-label">What Went Well</div><div contenteditable="true" class="editable textarea-like" data-key="cr_went_well">To be completed at project close.</div></div>
+          <div class="card"><div class="card-label">What Could Be Improved</div><div contenteditable="true" class="editable textarea-like" data-key="cr_improve">To be completed at project close.</div></div>
+        </div>
+        <div class="card"><div class="card-label">Recommendations for Future Projects</div><div contenteditable="true" class="editable textarea-like" data-key="cr_recommendations">Document recommendations for how this process or methodology should be applied to future equipment upload projects or other Procore data management challenges.</div></div>
+        <div class="card highlighted-card"><div class="card-label">✍ Sponsor Sign-Off</div><div contenteditable="true" class="editable textarea-like" data-key="cr_signoff">Sponsor Name: ___________________________&#10;Date: ______________________________________&#10;Signature: _________________________________&#10;&#10;Comments: To be added upon formal project closure.</div></div>
+      </section>
+
+      <!-- ==================== CELEBRATE ==================== -->
+      <section class="section" id="section-celebrate">
+        <div class="section-header">
+          <div class="breadcrumb"><span class="bc-phase control-text">Control</span> <span class="bc-sep">›</span> Celebrate Success</div>
+          <h1 class="section-title">🎉 Celebrate Success!!</h1>
+        </div>
+        <div class="card highlighted-card" style="text-align:center;padding:48px 32px;">
+          <div style="font-size:64px;margin-bottom:16px;">🎉</div>
+          <div style="font-size:26px;font-weight:800;color:var(--accent);margin-bottom:12px;">Project Complete!</div>
+          <div style="font-size:15px;color:var(--text-secondary);max-width:500px;margin:0 auto;line-height:1.8;">Recognise the team's hard work. Share the improvement story across the organisation. This project is a real-world example of Six Sigma methodology delivering measurable results.</div>
+        </div>
+        <div class="two-col-grid">
+          <div class="card"><div class="card-label">Team Recognition</div><div contenteditable="true" class="editable textarea-like" data-key="cel_team">Acknowledge every team member who contributed to the project. Call out specific contributions and the impact they had.</div></div>
+          <div class="card"><div class="card-label">How We're Sharing the Story</div><div contenteditable="true" class="editable textarea-like" data-key="cel_share">• Presentation to wider team at next all-hands&#10;• Improvement story posted to company intranet&#10;• SOP published to shared document library&#10;• Nominated for internal Six Sigma recognition</div></div>
+        </div>
+      </section>
+
+    </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
